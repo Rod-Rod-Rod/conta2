@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flujo de Efectivo Cuatrimestral</title>
+    <script>
+        function calcularTotalIngresos() {
+            let totalEnero = 0;
+            let totalFebrero = 0;
+            let totalMarzo = 0;
+            let totalAbril = 0;
+    
+            document.querySelectorAll(".ingreso-enero").forEach(input => totalEnero += parseFloat(input.value) || 0);
+            document.querySelectorAll(".ingreso-febrero").forEach(input => totalFebrero += parseFloat(input.value) || 0);
+            document.querySelectorAll(".ingreso-marzo").forEach(input => totalMarzo += parseFloat(input.value) || 0);
+            document.querySelectorAll(".ingreso-abril").forEach(input => totalAbril += parseFloat(input.value) || 0);
+    
+            document.getElementById("totalEneroIngreso").value = totalEnero;
+            document.getElementById("totalFebreroIngreso").value = totalFebrero;
+            document.getElementById("totalMarzoIngreso").value = totalMarzo;
+            document.getElementById("totalAbrilIngreso").value = totalAbril;
+    
+            calcularDiferencia();
+        }
+    
+        function calcularTotalEgresos() {
+            let totalEnero = 0;
+            let totalFebrero = 0;
+            let totalMarzo = 0;
+            let totalAbril = 0;
+    
+            document.querySelectorAll(".egreso-enero").forEach(input => totalEnero += parseFloat(input.value) || 0);
+            document.querySelectorAll(".egreso-febrero").forEach(input => totalFebrero += parseFloat(input.value) || 0);
+            document.querySelectorAll(".egreso-marzo").forEach(input => totalMarzo += parseFloat(input.value) || 0);
+            document.querySelectorAll(".egreso-abril").forEach(input => totalAbril += parseFloat(input.value) || 0);
+    
+            document.getElementById("totalEneroEgreso").value = totalEnero;
+            document.getElementById("totalFebreroEgreso").value = totalFebrero;
+            document.getElementById("totalMarzoEgreso").value = totalMarzo;
+            document.getElementById("totalAbrilEgreso").value = totalAbril;
+    
+            calcularDiferencia();
+        }
+    
+        function calcularDiferencia() {
+            const totalIngresoEnero = parseFloat(document.getElementById("totalEneroIngreso").value) || 0;
+            const totalIngresoFebrero = parseFloat(document.getElementById("totalFebreroIngreso").value) || 0;
+            const totalIngresoMarzo = parseFloat(document.getElementById("totalMarzoIngreso").value) || 0;
+            const totalIngresoAbril = parseFloat(document.getElementById("totalAbrilIngreso").value) || 0;
+    
+            const totalEgresoEnero = parseFloat(document.getElementById("totalEneroEgreso").value) || 0;
+            const totalEgresoFebrero = parseFloat(document.getElementById("totalFebreroEgreso").value) || 0;
+            const totalEgresoMarzo = parseFloat(document.getElementById("totalMarzoEgreso").value) || 0;
+            const totalEgresoAbril = parseFloat(document.getElementById("totalAbrilEgreso").value) || 0;
+    
+            const diferenciaEnero = totalIngresoEnero - totalEgresoEnero;
+            const diferenciaFebrero = totalIngresoFebrero - totalEgresoFebrero;
+            const diferenciaMarzo = totalIngresoMarzo - totalEgresoMarzo;
+            const diferenciaAbril = totalIngresoAbril - totalEgresoAbril;
+    
+            document.getElementById("diferenciaEnero").value = diferenciaEnero;
+            document.getElementById("diferenciaFebrero").value = diferenciaFebrero;
+            document.getElementById("diferenciaMarzo").value = diferenciaMarzo;
+            document.getElementById("diferenciaAbril").value = diferenciaAbril;
+    
+            // Asignar el flujo de efectivo de enero como saldo inicial de febrero
+            document.getElementById("SaldoFebrero").value = diferenciaEnero;
+    
+            // Asignar el flujo de efectivo de febrero como saldo inicial de marzo
+            document.getElementById("SaldoMarzo").value = diferenciaFebrero;
+    
+            // Asignar el flujo de efectivo de marzo como saldo inicial de abril
+            document.getElementById("SaldoAbril").value = diferenciaMarzo;
+        }
+    
+        function agregarFilaIngreso() {
+            const tabla = document.getElementById("tablaIngresos");
+            const nuevaFila = tabla.insertRow(tabla.rows.length - 2);
+            nuevaFila.insertCell(0).innerHTML = '<input type="text" placeholder="Nueva categoría">';
+            nuevaFila.insertCell(1).innerHTML = '<input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()">';
+            nuevaFila.insertCell(2).innerHTML = '<input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()">';
+            nuevaFila.insertCell(3).innerHTML = '<input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()">';
+            nuevaFila.insertCell(4).innerHTML = '<input type="number" class="ingreso-abril" oninput="calcularTotalIngresos()">';
+            calcularTotalIngresos();
+        }
+    
+        function agregarFilaEgreso() {
+            const tabla = document.getElementById("tablaEgresos");
+            const nuevaFila = tabla.insertRow(tabla.rows.length - 2); // Inserta antes del total de egresos
+            nuevaFila.insertCell(0).innerHTML = '<input type="text" placeholder="Nueva categoría">';
+            nuevaFila.insertCell(1).innerHTML = '<input type="number" class="egreso-enero" oninput="calcularTotalEgresos()">';
+            nuevaFila.insertCell(2).innerHTML = '<input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()">';
+            nuevaFila.insertCell(3).innerHTML = '<input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()">';
+            nuevaFila.insertCell(4).innerHTML = '<input type="number" class="egreso-abril" oninput="calcularTotalEgresos()">';
+            calcularTotalEgresos();
+        }
+    </script>
+</head>    
+<body>
+    <h1>Flujo de Efectivo Cuatrimestral (Enero - Abril)</h1>
+    <table id="tablaIngresos" border>
+        <tr>
+            <th>Concepto</th>
+            <th>Enero</th>
+            <th>Febrero</th>
+            <th>Marzo</th>
+            <th>Abril</th>
+        </tr>
+        <tr>
+            <th colspan="5" style="text-align: center; font-weight: bold">Ingresos</th>
+        </tr>
+        <tr>
+            <td>Saldo Inicial</td>
+            <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()" id="SaldoFebrero" readonly></td>
+            <td><input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()" id="SaldoMarzo" readonly></td>
+            <td><input type="number" class="ingreso-abril" oninput="calcularTotalIngresos()" id="SaldoAbril" readonly></td>    
+        </tr>
+        <tr>
+            <td>Ventas al Contado</td>
+            <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-abril" oninput="calcularTotalIngresos()"></td>
+        </tr>
+        <tr>
+            <td>Prestamos</td>
+            <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()"></td>
+            <td><input type="number" class="ingreso-abril" oninput="calcularTotalIngresos()"></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center;">
+                <button onclick="agregarFilaIngreso()">Agregar otra categoría de Ingreso</button>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Total de Ingresos</strong></td>
+            <td><input type="number" id="totalEneroIngreso" readonly></td>
+            <td><input type="number" id="totalFebreroIngreso" readonly></td>
+            <td><input type="number" id="totalMarzoIngreso" readonly></td>
+            <td><input type="number" id="totalAbrilIngreso" readonly></td>
+        </tr>
+    </table>
+    <table id="tablaEgresos" border>
+        <tr>
+            <th colspan="5" style="text-align: center; font-weight: bold">Egresos</th>
+        </tr>
+        <tr>
+            <td>Sueldos</td>
+            <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-abril" oninput="calcularTotalEgresos()"></td>
+        </tr>
+        <tr>
+            <td>Compras</td>
+            <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-abril" oninput="calcularTotalEgresos()"></td>
+        </tr>
+        <tr>
+            <td>Agua</td>
+            <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-abril" oninput="calcularTotalEgresos()"></td>
+        </tr>
+        <tr>
+            <td>Luz</td>
+            <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
+            <td><input type="number" class="egreso-abril" oninput="calcularTotalEgresos()"></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center;">
+                <button onclick="agregarFilaEgreso()">Agregar otra categoría de Egreso</button>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Total de Egresos</strong></td>
+            <td><input type="number" id="totalEneroEgreso" readonly></td>
+            <td><input type="number" id="totalFebreroEgreso" readonly></td>
+            <td><input type="number" id="totalMarzoEgreso" readonly></td>
+            <td><input type="number" id="totalAbrilEgreso" readonly></td>
+        </tr>
+    </table>
+    <table border>
+        <tr>
+            <td><strong>Flujo de Efectivo</strong></td>
+            <td><input type="number" id="diferenciaEnero" readonly></td>
+            <td><input type="number" id="diferenciaFebrero" readonly></td>
+            <td><input type="number" id="diferenciaMarzo" readonly></td>
+            <td><input type="number" id="diferenciaAbril" readonly></td>
+        </tr>
+    </table>
+    <br>
+    <button onclick="window.location.href='index.html'">Ir al Inicio</button>
+</body>
+</html>
