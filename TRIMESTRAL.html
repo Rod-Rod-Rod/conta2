@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flujo de Efectivo Trimestral</title>
+    <title>Flujo de Efectivo - Trimestral</title>
+    <link rel="stylesheet" href="trimestral.css">
     <script>
         function calcularTotalIngresos() {
             let totalEnero = 0;
@@ -64,7 +65,7 @@
         function agregarFilaIngreso() {
             const tabla = document.getElementById("tablaIngresos");
             const nuevaFila = tabla.insertRow(tabla.rows.length - 2); // Inserta antes del total de ingresos
-            nuevaFila.insertCell(0).innerHTML = '<input type="text" placeholder="Nueva categoría">';
+            nuevaFila.insertCell(0).innerHTML = '<input type="text" class="contenido nuevo" placeholder="Nueva categoría">';
             nuevaFila.insertCell(1).innerHTML = '<input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()">';
             nuevaFila.insertCell(2).innerHTML = '<input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()">';
             nuevaFila.insertCell(3).innerHTML = '<input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()">';
@@ -74,7 +75,7 @@
         function agregarFilaEgreso() {
             const tabla = document.getElementById("tablaEgresos");
             const nuevaFila = tabla.insertRow(tabla.rows.length - 2); // Inserta antes del total de egresos
-            nuevaFila.insertCell(0).innerHTML = '<input type="text" placeholder="Nueva categoría">';
+            nuevaFila.insertCell(0).innerHTML = '<input type="text" class="contenido nuevo" placeholder="Nueva categoría">';
             nuevaFila.insertCell(1).innerHTML = '<input type="number" class="egreso-enero" oninput="calcularTotalEgresos()">';
             nuevaFila.insertCell(2).innerHTML = '<input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()">';
             nuevaFila.insertCell(3).innerHTML = '<input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()">';
@@ -83,10 +84,11 @@
     </script>
 </head>    
 <body>
-    <h1>Flujo de Efectivo Trimestral (Enero - Marzo)</h1>
-    <table id="tablaIngresos" border>
+<div>
+    <h1>Flujo de Efectivo Trimestral <span>(Enero - Marzo)</span></h1>
+    <table id="tablaIngresos">
         <tr>
-            <th>Concepto</th>
+            <th class="contenido">Concepto</th>
             <th>Enero</th>
             <th>Febrero</th>
             <th>Marzo</th>
@@ -95,86 +97,86 @@
             <th colspan="4" style="text-align: center; font-weight: bold">Ingresos</th>
         </tr>
         <tr>
-            <td>Saldo Inicial</td>
+            <td class="contenido">Saldo Inicial</td>
             <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
             <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()" id="SaldoFebrero" readonly></td>
             <td><input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()" id="SaldoMarzo" readonly></td>    
         </tr>
         <tr>
-            <td>Ventas al Contado</td>
+            <td class="contenido">Ventas al Contado</td>
             <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
             <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()"></td>
             <td><input type="number" class="ingreso-marzo"  oninput="calcularTotalIngresos()"></td>   
         </tr>
         <tr>
-            <td>Préstamos</td>
+            <td class="contenido">Préstamos</td>
             <td><input type="number" class="ingreso-enero" oninput="calcularTotalIngresos()"></td>
             <td><input type="number" class="ingreso-febrero" oninput="calcularTotalIngresos()"></td>
             <td><input type="number" class="ingreso-marzo" oninput="calcularTotalIngresos()"></td>   
         </tr>
         <tr>
             <td colspan="4" style="text-align: center;">
-                <button onclick="agregarFilaIngreso()">Agregar otra categoría de Ingreso</button>
+                <button class="agregar" onclick="agregarFilaIngreso()">Agregar otra categoría de Ingreso</button>
             </td>
         </tr>
         <tr>
-            <td><strong>Total de Ingresos</strong></td>
+            <td class="contenido"><strong>Total de Ingresos</strong></td>
             <td><input type="number" id="totalEneroIngreso" readonly></td>
             <td><input type="number" id="totalFebreroIngreso" readonly></td>
             <td><input type="number" id="totalMarzoIngreso" readonly></td>
         </tr>
     </table>
-    <!-- Tabla de Egresos -->
-    <table id="tablaEgresos" border>
+    <table id="tablaEgresos">
         <tr>
             <th colspan="4" style="text-align: center; font-weight: bold">Egresos</th>
         </tr>
         <tr>
-            <td>Sueldos</td>
+            <td class="contenido">Sueldos</td>
             <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>    
         </tr>
         <tr>
-            <td>Compras</td>
+            <td class="contenido">Compras</td>
             <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
         </tr>
         <tr>
-            <td>Agua</td>
+            <td class="contenido">Agua</td>
             <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
         </tr>
         <tr>
-            <td>Luz</td>
+            <td class="contenido">Luz</td>
             <td><input type="number" class="egreso-enero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()"></td>
             <td><input type="number" class="egreso-marzo" oninput="calcularTotalEgresos()"></td>
         </tr>
         <tr>
             <td colspan="4" style="text-align: center;">
-                <button onclick="agregarFilaEgreso()">Agregar otra categoría de Egreso</button>
+                <button class="agregar" onclick="agregarFilaEgreso()">Agregar otra categoría de Egreso</button>
             </td>
         </tr>
         <tr>
-            <td><strong>Total de Egresos</strong></td>
+            <td class="contenido"><strong>Total de Egresos</strong></td>
             <td><input type="number" id="totalEneroEgreso" readonly></td>
             <td><input type="number" id="totalFebreroEgreso" readonly></td>
             <td><input type="number" id="totalMarzoEgreso" readonly></td>
         </tr>
     </table>
-    <!-- Tabla de Diferencia -->
-    <table border>
+    <table>
         <tr>
-            <th>Flujo de Efectivo</th>
-            <td><input type="number" id="diferenciaEnero" readonly></td>
-            <td><input type="number" id="diferenciaFebrero" readonly></td>
-            <td><input type="number" id="diferenciaMarzo" readonly></td>
+            <td class="contenido">Flujo de Efectivo</td>
+            <td><input class="flujo" type="number" id="diferenciaEnero" readonly></td>
+            <td><input class="flujo" type="number" id="diferenciaFebrero" readonly></td>
+            <td><input class="flujo" type="number" id="diferenciaMarzo" readonly></td>
         </tr>
     </table>
     <br>
-    <button onclick="window.location.href='index.html'">Ir al Inicio</button>
+    <button class="volver no-print" onclick="window.location.href='index.html'">Ir al Inicio</button>
+    <button class="volver no-print" onclick="window.print()">Imprimir</button>
+</div>
 </body>
 </html>
