@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flujo de Efectivo Semestral</title>
-    <link rel="stylesheet" href="semestral.css">
+    <link rel="stylesheet" href="6y12.css">
     <script>
         function calcularTotalIngresos() {
             let totalEnero = 0;
@@ -121,6 +121,7 @@
     </script>
 </head>
 <body>
+<div>
     <h1>Flujo de Efectivo Semestral (Enero - Junio)</h1>
     <table id="tablaIngresos" border>
         <tr>
@@ -244,6 +245,8 @@
         </tr>
     </table>
     <br>
-    <button onclick="window.location.href='index.html'">Ir al Inicio</button>
+    <button class="volver no-print" onclick="window.location.href='index.html'">Volver al inicio</button>
+    <button class="volver no-print" onclick="window.print()">Imprimir</button>
+</div>
 </body>
 </html>

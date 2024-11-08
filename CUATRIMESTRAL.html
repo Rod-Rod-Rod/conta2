@@ -88,7 +88,7 @@
     
         function agregarFilaEgreso() {
             const tabla = document.getElementById("tablaEgresos");
-            const nuevaFila = tabla.insertRow(tabla.rows.length - 2); // Inserta antes del total de egresos
+            const nuevaFila = tabla.insertRow(tabla.rows.length - 2);
             nuevaFila.insertCell(0).innerHTML = '<input type="text" placeholder="Nueva categoría">';
             nuevaFila.insertCell(1).innerHTML = '<input type="number" class="egreso-enero" oninput="calcularTotalEgresos()">';
             nuevaFila.insertCell(2).innerHTML = '<input type="number" class="egreso-febrero" oninput="calcularTotalEgresos()">';
