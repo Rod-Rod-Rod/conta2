@@ -1,52 +1,89 @@
+/* General */
 body {
-    background-color: #b2bac4;
-
+    background-color: #f4f4f4;
+    font-size: 17px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-p {
-    color: #000;
-    font-size: 18px;
-    font-family: Tahoma;
-    padding-left: 50px;
-}
-
+/* Encabezado */
 h1 {
-    font-size: 75px;
-    font-family: Arial;
-    color:#001229;
-    margin-bottom: 5px;
+    font-size: 48px;
+    font-family: Arial, sans-serif;
+    color: #062543;
+    padding-top: 25px;
     text-align: center;
 }
 
-button {
-    font-family: Helvetica;
-    font-size:19px;
-    font-weight: bold;
-    height: 50px;
-    width:175px;
-    border-color: red;
-    border-width: 1px;
-    background: transparent;
-}
-
+/* Contenedor Principal */
 .caja {
-    background: #fff;
-    margin: auto;
-    width: 850px;
-    border-color: blue;
-    border-width: 1px;
-    border-style: solid;
-}
-
-.botones {
-    background: #ffffff;
-    width: 713px;
-    height: 50px;
-    margin: auto;
-    padding: 25px;
-}
-
-.present{
-    font-size: 10px;
+    width: 92%;
+    max-width: 1200px;
+    background-color: #fff;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     text-align: center;
+}
+
+/* Estilo de los botones */
+.botones a {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.botones a:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Pie de página */
+footer .present {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+}
+
+/* Estilo para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .botones a {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .caja {
+        width: 95%;
+    }
+}
+
+/* Print media */
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    input {
+        border: none;
+    }
+
+    .caja {
+        box-shadow: none;
+    }
 }
